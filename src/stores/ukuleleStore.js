@@ -16,14 +16,24 @@ class UkuleleStore {
   }
 
   fetchUkulele = async () => {
-    const response = await axios.get("http://localhost:8000/products");
-    this.products = response.data;
+    try {
+      const response = await axios.get("http://localhost:8000/products");
+      this.products = response.data;
+    } catch (error) {
+      console.error("UkuleleStore -> fetchUkulele -> error", error);
+    }
   };
 
-  createUkulele = (newUkulele) => {
-    newUkulele.id = this.products[this.products.length - 1].id + 1;
-    newUkulele.slug = slugify(newUkulele.name);
-    this.products.push(newUkulele);
+  createUkulele = async (newUkulele) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/products",
+        newUkulele
+      );
+      this.products.push(res.data);
+    } catch (error) {
+      console.log("UkuleleStore -> createUkulele -> error", error);
+    }
   };
 
   updateUkulele = (updatedUkulele) => {

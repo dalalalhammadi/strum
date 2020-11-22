@@ -97,8 +97,8 @@ export const UkuleleWrapper = styled.div`
   margin: 20px;
 
   img {
-    width: 300px;
-    height: 500px;
+    width: 350px;
+    height: 450px;
     object-fit: cover;
   }
 
