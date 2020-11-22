@@ -1,65 +1,53 @@
-import ukulele from './ukulele draw.jpeg';
-import imgukulele from './ukulel .jpg';
-import img2ukulele from './ukulele2.jpg';
-import './App.css';
+import { useState } from "react";
+import { Route, Switch } from "react-router";
 
+import { ThemeProvider } from "styled-components";
+import { GlobalStyle } from "./styles.js";
 
-const styles = {
-  text: {
-    textAlign: "center"
-  },
-  logoimage: {
-    display: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
-    width: "10%"
-  },
-  imgstyle: {
-    width: "200px", height: "200px"
-  },
+import UkuleleList from "./components1/UkuleleList";
+import UkuleleDetail from "./components1/UkuleleDetail";
+import Home from "./components1/Home";
+import NavBar from "./components1/NavBar";
 
-  list: {
-    alignItems: "center",
-    justifyContent: "center",
-    display: "flex"
+const theme = {
+  light: {
+    mainColor: "#7BDCB5",
+    backgroundColor: "#FCB900",
+    blue: "#9900EF",
+    red: "#F78DA7",
   },
-  ukulele: {
-    margin: "20px"
-  }
-
+  dark: {
+    mainColor: "3FCB900",
+    backgroundColor: "#7BDCB5",
+    blue: "#9900EF",
+    red: "#ff3232",
+  },
 };
 
 function App() {
+  const [currentTheme, setCurrentTheme] = useState("dark");
+
+  const toggleTheme = () =>
+    setCurrentTheme(currentTheme === "light" ? "dark" : "light");
 
   return (
-    <div>
-      <div>
-        <h1 style={styles.text}>strum</h1>
-        <h4 style={styles.text} >The ukulele hunt</h4>
-        <img src style={styles.logoimage}
-          src={ukulele} />
-      </div >
-      <div style={styles.list}>
-        <div style={styles.ukulele}>
-          <img style={styles.imgstyle}
-            src={imgukulele} />
-          <p style={styles.text}> ukulele red strap </p>
-          <p style={styles.text}>50 kD</p>
-        </div>
-        <div>
-          <img style={styles.imgstyle}
-            src={img2ukulele} />
-          <p style={styles.text}> ukulele green strap </p>
-          <p style={styles.text}>60 kD</p>
-        </div>
-      </div>
-    </div>
+    <ThemeProvider theme={theme[currentTheme]}>
+      <GlobalStyle />
+      <NavBar currentTheme={currentTheme} toggleTheme={toggleTheme} />
 
-
+      <Switch>
+        <Route path="/ukulele/:ukuleleSlug">
+          <UkuleleDetail />
+        </Route>
+        <Route path="/ukulele">
+          <UkuleleList />
+        </Route>
+        <Route exact path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </ThemeProvider>
   );
-
 }
-
-
 
 export default App;
