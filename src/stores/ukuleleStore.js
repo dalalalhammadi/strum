@@ -36,12 +36,20 @@ class UkuleleStore {
     }
   };
 
-  updateUkulele = (updatedUkulele) => {
-    const ukulele = this.products.find(
-      (ukulele) => ukulele.id === updatedUkulele.id
-    );
-    for (const key in ukulele) ukulele[key] = updatedUkulele[key];
-    ukulele.slug = slugify(ukulele.name);
+  updateUkulele = async (updatedUkulele) => {
+    try {
+      await axios.put(
+        `http://localhost:8000/products/${updatedUkulele.id}`,
+        updatedUkulele
+      );
+      const ukulele = this.products.find(
+        (ukulele) => ukulele.id === updatedUkulele.id
+      );
+      for (const key in ukulele) ukulele[key] = updatedUkulele[key];
+      ukulele.slug = slugify(ukulele.name);
+    } catch (error) {
+      console.log("UkuleleStore -> updateUkulele -> error", error);
+    }
   };
 
   deleteUkulele = async (ukuleleId) => {
