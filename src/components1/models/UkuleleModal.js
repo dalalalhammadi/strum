@@ -18,10 +18,13 @@ const UkuleleModal = ({ isOpen, closeModal, oldUkulele }) => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefult();
-    ukuleleStore[oldUkulele ? "updataUkulele" : "createUkulele"](ukulele);
+    event.preventDefault();
+    ukuleleStore[oldUkulele ? "updateUkulele" : "createUkulele"](ukulele);
     closeModal();
   };
+
+  const handleImage = (event) =>
+    setUkulele({ ...ukulele, image: event.target.files[0] });
 
   return (
     <Modal
@@ -68,8 +71,8 @@ const UkuleleModal = ({ isOpen, closeModal, oldUkulele }) => {
           <input
             value={ukulele.image}
             name="image"
-            onChange={handleChange}
-            type="text"
+            onChange={handleImage}
+            type="file"
             className="form-control"
           />
         </div>

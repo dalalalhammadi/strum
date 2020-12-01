@@ -6,6 +6,7 @@ import { GlobalStyle } from "./styles.js";
 
 import UkuleleList from "./components1/UkuleleList";
 import UkuleleDetail from "./components1/UkuleleDetail";
+import MusicDetail from "./components1/MusicDetail";
 import Home from "./components1/Home";
 import NavBar from "./components1/NavBar";
 
@@ -36,6 +37,9 @@ function App() {
       <NavBar currentTheme={currentTheme} toggleTheme={toggleTheme} />
 
       <Switch>
+        <Route path="/music/:musicSlug">
+          <MusicDetail />
+        </Route>
         <Route path="/ukulele/:ukuleleSlug">
           <UkuleleDetail />
         </Route>

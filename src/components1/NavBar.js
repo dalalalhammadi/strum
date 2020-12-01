@@ -12,6 +12,9 @@ const NavBar = (props) => {
       <Link to="/ukulele" style={{ margin: 10, float: " right" }}>
         UkuleleList
       </Link>
+      <NavItem to="/music" style={{ margin: 10, float: "right" }}>
+        Music
+      </NavItem>
       <NavItem to="/" style={{ margin: 10, float: "right" }}>
         HOME
       </NavItem>
