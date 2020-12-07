@@ -14,7 +14,7 @@ class MusicStore {
 
   fetchMusic = async () => {
     try {
-      const response = await axios.get("http://localhost:8001/music");
+      const response = await axios.get("http://localhost:8001/musics");
       this.musics = response.data;
     } catch (error) {
       console.error("MusicStore -> fetchMusic -> error", error);

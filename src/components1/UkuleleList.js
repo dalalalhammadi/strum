@@ -9,7 +9,7 @@ import AddButton from "./buttons/AddButton";
 const UkuleleList = (props) => {
   const [query, setQuery] = useState("");
 
-  const filteredUkulele = ukuleleStore.products.filter((ukulele) =>
+  const filteredUkulele = ukuleleStore.ukuleles.filter((ukulele) =>
     ukulele.name.toLowerCase().includes(query.toLowerCase())
   );
   const ukuleleList = filteredUkulele.map((ukulele) => (
@@ -19,7 +19,6 @@ const UkuleleList = (props) => {
   return (
     <>
       <SearchBar setQuery={setQuery} />
-      <AddButton />
       <ListWrapper>{ukuleleList} </ListWrapper>;
     </>
   );

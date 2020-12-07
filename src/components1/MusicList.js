@@ -8,7 +8,7 @@ import { observer } from "mobx-react";
 const MusicList = (props) => {
   const [query, setQuery] = useState("");
 
-  const filteredMusic = musicStore.products.filter((music) =>
+  const filteredMusic = musicStore.ukuleles.filter((music) =>
     music.name.toLowerCase().includes(query.toLowerCase())
   );
   const musicList = filteredMusic.map((music) => <MusicItem music={music} />);
@@ -16,7 +16,7 @@ const MusicList = (props) => {
   return (
     <>
       <SearchBar setQuery={setQuery} />
-      <ListWrapper>{musicList} </ListWrapper>;
+      <ListWrapper> </ListWrapper>;
     </>
   );
 };

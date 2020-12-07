@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BsPlusCircle } from "react-icons/bs";
 import UkuleleModal from "../models/UkuleleModal";
 
-const AddButton = () => {
+const AddButton = ({ music }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => setIsOpen(false);
@@ -10,7 +10,7 @@ const AddButton = () => {
   return (
     <>
       <BsPlusCircle className="float-right" size="2em" onClick={openModal} />
-      <UkuleleModal isOpen={isOpen} closeModal={closeModal} />
+      <UkuleleModal music={music} isOpen={isOpen} closeModal={closeModal} />
     </>
   );
 };

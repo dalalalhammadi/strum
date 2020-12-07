@@ -1,6 +1,7 @@
 import React from "react";
 import { NavItem, ThemeButton } from "../styles";
 import { Link } from "react-router-dom";
+import SignupButton from "./buttons/SignupButton";
 
 const NavBar = (props) => {
   return (
@@ -18,6 +19,7 @@ const NavBar = (props) => {
       <NavItem to="/" style={{ margin: 10, float: "right" }}>
         HOME
       </NavItem>
+      <SignupButton />
       <ThemeButton onClick={props.toggleTheme}>
         {props.currentTheme === "light" ? "Dark" : "light"} Mode
       </ThemeButton>

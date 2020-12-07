@@ -1,14 +1,12 @@
 import { useState } from "react";
-import { Route, Switch } from "react-router";
 
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./styles.js";
 
-import UkuleleList from "./components1/UkuleleList";
-import UkuleleDetail from "./components1/UkuleleDetail";
-import MusicDetail from "./components1/MusicDetail";
-import Home from "./components1/Home";
 import NavBar from "./components1/NavBar";
+import Routes from "./components1/Routes";
+import { observer } from "mobx-react";
+import ukuleleStore from "./stores/ukuleleStore.js";
 
 const theme = {
   light: {
@@ -32,26 +30,14 @@ function App() {
     setCurrentTheme(currentTheme === "light" ? "dark" : "light");
 
   return (
-    <ThemeProvider theme={theme[currentTheme]}>
-      <GlobalStyle />
-      <NavBar currentTheme={currentTheme} toggleTheme={toggleTheme} />
-
-      <Switch>
-        <Route path="/music/:musicSlug">
-          <MusicDetail />
-        </Route>
-        <Route path="/ukulele/:ukuleleSlug">
-          <UkuleleDetail />
-        </Route>
-        <Route path="/ukulele">
-          <UkuleleList />
-        </Route>
-        <Route exact path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={theme[currentTheme]}>
+        <GlobalStyle />
+        <NavBar currentTheme={currentTheme} toggleTheme={toggleTheme} />
+        {ukuleleStore.loading === true ? <h1> loading</h1> : <Routes />}
+      </ThemeProvider>
+    </>
   );
 }
 
-export default App;
+export default observer(App);

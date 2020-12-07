@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Modal from "react-modal";
-import { CreatButtonStyled } from "../../styles.js";
+import { CreateButtonStyled } from "../../styles";
 import ukuleleStore from "../../stores/ukuleleStore";
 
-const UkuleleModal = ({ isOpen, closeModal, oldUkulele }) => {
+const UkuleleModal = ({ music, isOpen, closeModal, oldUkulele }) => {
   const [ukulele, setUkulele] = useState(
     oldUkulele ?? {
       name: "",
@@ -19,7 +19,12 @@ const UkuleleModal = ({ isOpen, closeModal, oldUkulele }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    ukuleleStore[oldUkulele ? "updateUkulele" : "createUkulele"](ukulele);
+    if (oldUkulele) ukuleleStore.updateUkulele(ukulele);
+    else ukuleleStore.createUkulele(ukulele, music);
+    // ukuleleStore[oldUkulele ? "updateUkulele" : "createUkulele"](
+    //   ukulele,
+    //   music
+
     closeModal();
   };
 
@@ -76,9 +81,9 @@ const UkuleleModal = ({ isOpen, closeModal, oldUkulele }) => {
             className="form-control"
           />
         </div>
-        <CreatButtonStyled type="submit">
+        <CreateButtonStyled type="submit">
           {oldUkulele ? "update" : "create "}
-        </CreatButtonStyled>
+        </CreateButtonStyled>
       </form>
     </Modal>
   );
